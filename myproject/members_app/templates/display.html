@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Відображення даних</title>
+</head>
+<body>
+
+    <div>
+        <h1>Дані учасників:</h1>
+        {% for member in members %}
+            <p>Ім'я: {{ member.name }}, Email: {{ member.email }}</p>
+        {% endfor %}
+        {% for data in member_data %}
+            <h1>Учасник {{ data.member.name }} написав:</h1>
+            <p>Текст: {{ data.text }}</p>
+            <p>Дата публікації: {{ data.pub_date }}</p>
+        {% endfor %}
+    </div>
+    <div>
+        <button> <a href="{% url 'input' %}"> Ввести дані</a></button>
+    </div>
+    <div>
+        {% if user.is_authenticated%}
+            <button> <a href="{% url 'session' %}"> Показати дані сесії</a></button>
+        {% endif %}
+    </div>
+</body>
+</html>
