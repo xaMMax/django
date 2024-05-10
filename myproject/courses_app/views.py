@@ -3,6 +3,7 @@ from django.shortcuts import render
 
 
 # Create your views here.
-@login_required(login_url='/admin')
+# @login_required(login_url='/admin')
 def courses_page(request):
+
     return render(request, 'courses.html')

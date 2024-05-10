@@ -4,6 +4,15 @@
     <title>Courses</title>
 </head>
 <body>
-    <h1>This is the Courses page</h1>
+
+    {% if request.user.is_authenticated %}
+        <div>
+            <h1>This is the Courses page</h1>
+        </div>
+    {% else %}
+        <div>
+            <h1>You have no permissions to view this page</h1>
+        </div>
+    {% endif %}
 </body>
 </html>
