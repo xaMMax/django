@@ -38,7 +38,7 @@ def display_view(request):
 def session_view(request):
     # breakpoint()
     if request.session:
-        data = request.session.TEST_COOKIE_NAME, request.session.TEST_COOKIE_VALUE
+        data = request.session.TEST_COOKIE_NAME, request.session.TEST_COOKIE_VALUE, dir(request.session)
     else:
         data = 'No session data.'
 

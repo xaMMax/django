@@ -7,6 +7,7 @@
 
     <div>
         <h1>Дані учасників:</h1>
+
         {% for member in members %}
             <p>Ім'я: {{ member.name }}, Email: {{ member.email }}</p>
         {% endfor %}
@@ -15,6 +16,7 @@
             <p>Текст: {{ data.text }}</p>
             <p>Дата публікації: {{ data.pub_date }}</p>
         {% endfor %}
+
     </div>
     <div>
         <button> <a href="{% url 'input' %}"> Ввести дані</a></button>
