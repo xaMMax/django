@@ -1,19 +1,35 @@
 from django.contrib import admin
-from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
+from django.utils.translation import gettext_lazy as _
 
-from .models import UserProfile
-
-User = get_user_model()  # Get the Django User model dynamically
+from .models import UserProfile, CustomUser
 
 
 class UserProfileInline(admin.StackedInline):
-    model = UserProfile  # Inline model for UserProfile
+    model = UserProfile
 
 
 class CustomUserAdmin(UserAdmin):
-    inlines = (UserProfileInline,)  # Add UserProfileInline to the UserAdmin
+    model = CustomUser
+    fieldsets = (
+        (None, {"fields": ("username", "password")}),
+        (_("Personal info"), {"fields": ("first_name", "last_name", "email", "title", "date_of_birth")}),
+        (
+            _("Permissions"),
+            {
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                    "groups",
+                    "user_permissions",
+                ),
+            },
+        ),
+        (_("Important dates"), {"fields": ("last_login", "date_joined")}),
+    )
+    list_display = ("username", "email", "title",)
+    inlines = [UserProfileInline]
 
 
-admin.site.unregister(User)  # Unregister the default UserAdmin
-admin.site.register(User, CustomUserAdmin)  # Register the CustomUserAdmin with the User model
+admin.site.register(CustomUser, CustomUserAdmin)
